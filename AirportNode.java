@@ -1,33 +1,29 @@
 import java.util.*;
 
-public class BasicNode implements Node{
+public class AirportNode implements Node{
 
 	String name;
-	int weight;
-	ArrayList<BasicNode> neighbors;
+	ArrayList<Connection> connections;
 	
-	public BasicNode(String name, int weight) {
+	public AirportNode(String name) {
 		this.name=name;
-		this.weight=weight;
 	}
 	
 	public String getNodeName() {
 		return this.name;
 	}
-	public int getNodeWeight() {
-		return this.weight;
+	
+	public Collection<? extends Node> getNeighbors() {
+		return this.connections;
 	}
-	public Collection<BasicNode> getNeighbors() {
-		return this.neighbors;
-	}
-	public void setNeighbors(ArrayList<BasicNode> neighbors) {
-		this.neighbors=neighbors;
+	public void setNeighbors(ArrayList<Connection> connections) {
+		this.connections=connections;
 	}
 	public String toString()
 	{
 		return this.getNodeName();
 	}
-	static public List<Node> getShortestPathByWeight(Node s, Node t) {
+	public static  List<Node> getShortestPathByWeight(Node s, Node t) {
 		List<Node> finalList = new ArrayList<>();
 		
 		Queue<Node> todo = new LinkedList<>();
@@ -36,6 +32,7 @@ public class BasicNode implements Node{
 		
 		
 		todo.add(s);
+		
 		return finalList;
 	}
 	static public List<Node> findShortestPath(Node s, Node t) {
@@ -113,54 +110,52 @@ public class BasicNode implements Node{
 		 * 
 		 */
 		
-		BasicNode start = new BasicNode("start", 0);
+		AirportNode MSY = new AirportNode("New Orleans");
 		
-		BasicNode node1 = new BasicNode("node 1", 1);
-		BasicNode node2 = new BasicNode("node 2", 2);
+		AirportNode ATL = new AirportNode("Atlanta");
+		AirportNode DFW = new AirportNode("Dallas");
 		
-		BasicNode node3 = new BasicNode("node 3", 4);
-		BasicNode node4 = new BasicNode("node 4", 5);
+		AirportNode node3 = new AirportNode("New York");
+		AirportNode node4 = new AirportNode("Boston");
 		
-		BasicNode node5 = new BasicNode("node 5", 7);
-		BasicNode node6 = new BasicNode("node 6", 6);
+		AirportNode node5 = new AirportNode("San Fran");
+		AirportNode node6 = new AirportNode("Washington D.C.");
 		
-		BasicNode node7 = new BasicNode("node 7", 10);
+		AirportNode node7 = new AirportNode("London");
 		
-		ArrayList<BasicNode> startGroup = new ArrayList();
+		ArrayList<Connection> MSY_Flights = new ArrayList();
+		Connection MSY_ATL = new Connection("MSY->ATL",MSY, ATL, 424.73);
+		Connection MSY_DFW = new Connection("MSY->DFW",MSY,DFW,447.02);
 		
-		startGroup.add(node1);
-		startGroup.add(node2);
-		start.setNeighbors(startGroup);
-		
-		ArrayList<BasicNode> node1Group = new ArrayList();
+		ArrayList<AirportNode> node1Group = new ArrayList();
 		
 		node1Group.add(node3);
 		node1Group.add(node4);
 		node1.setNeighbors(node1Group);
 		
-		ArrayList<BasicNode> node2Group = new ArrayList();
+		ArrayList<AirportNode> node2Group = new ArrayList();
 		
 		node2Group.add(node4);
 		node2Group.add(node5);
 		node2.setNeighbors(node2Group);
 		
-		ArrayList<BasicNode> node3Group = new ArrayList();
+		ArrayList<AirportNode> node3Group = new ArrayList();
 		
 		node3Group.add(node6);
 		node3Group.add(node7);
 		node3.setNeighbors(node3Group);
 		
-		ArrayList<BasicNode> node4Group = new ArrayList();
+		ArrayList<AirportNode> node4Group = new ArrayList();
 		
 		node4Group.add(node7);
 		node4.setNeighbors(node4Group);
 		
-		ArrayList<BasicNode> node5Group = new ArrayList();
+		ArrayList<AirportNode> node5Group = new ArrayList();
 		
 		node5Group.add(node3);
 		node5.setNeighbors(node5Group);
 
-		ArrayList<BasicNode> node6Group = new ArrayList();
+		ArrayList<AirportNode> node6Group = new ArrayList();
 		
 		node6Group.add(node7);
 		node6.setNeighbors(node6Group);

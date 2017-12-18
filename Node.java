@@ -5,7 +5,7 @@ public interface Node {
 	
 	public String getNodeName();
 	
-	public int getNodeWeight();
+	public String toString();
 	
 	
 }
