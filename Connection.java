@@ -12,9 +12,12 @@ public class Connection implements Node{
 		this.source=source;
 		this.target=target;
 		this.distance=distance;
-		
+		neighbors= new ArrayList<>();
 		neighbors.add(source);
 		neighbors.add(target);
+	}
+	public String toString() {
+		return this.source.getNodeName() + "\t" + this.target.getNodeName() + "\t\t" + this.distance;
 	}
 	public double getDistance() {
 		return this.distance;

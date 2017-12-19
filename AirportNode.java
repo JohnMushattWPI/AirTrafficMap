@@ -21,7 +21,12 @@ public class AirportNode implements Node{
 	}
 	public String toString()
 	{
-		return this.getNodeName();
+		String temp = "Airport: " + this.getNodeName() +"\nAll connections from this airport:\n" + 
+	"Source\t\tDestination\tDistance\n";
+		for(int i =0; i<this.connections.size();i++) {
+			temp+=this.connections.get(i).toString() +"\n";
+		}
+		return temp;
 	}
 	public static  List<Node> getShortestPathByWeight(Node s, Node t) {
 		List<Node> finalList = new ArrayList<>();
@@ -35,7 +40,7 @@ public class AirportNode implements Node{
 		
 		return finalList;
 	}
-	static public List<Node> findShortestPath(Node s, Node t) {
+	/*static public List<Node> findShortestPath(Node s, Node t) {
 		
 		List<Node> visited = new ArrayList<>();		//Might want to make a LinkedList
 		Queue<Node> todo = new LinkedList<>(); 		//Need to create a data type that implements queue, (Queue is an interface?)
@@ -95,7 +100,7 @@ public class AirportNode implements Node{
 			return null;
 
 		}
-	}
+	}*/
 	public static void main(String[] args)
 	{
 		
@@ -115,52 +120,35 @@ public class AirportNode implements Node{
 		AirportNode ATL = new AirportNode("Atlanta");
 		AirportNode DFW = new AirportNode("Dallas");
 		
-		AirportNode node3 = new AirportNode("New York");
-		AirportNode node4 = new AirportNode("Boston");
+		AirportNode ORD = new AirportNode("Chicago");
+		AirportNode BOS = new AirportNode("Boston");
 		
 		AirportNode node5 = new AirportNode("San Fran");
 		AirportNode node6 = new AirportNode("Washington D.C.");
 		
-		AirportNode node7 = new AirportNode("London");
+		AirportNode LHR = new AirportNode("London");
 		
 		ArrayList<Connection> MSY_Flights = new ArrayList();
+		
 		Connection MSY_ATL = new Connection("MSY->ATL",MSY, ATL, 424.73);
 		Connection MSY_DFW = new Connection("MSY->DFW",MSY,DFW,447.02);
+		Connection MSY_BOS = new Connection("MSY->BOS",MSY,BOS,1366.68);
+		Connection MSY_LHR = new Connection("MSY-LHR",MSY,LHR,4619.33);
 		
-		ArrayList<AirportNode> node1Group = new ArrayList();
-		
-		node1Group.add(node3);
-		node1Group.add(node4);
-		node1.setNeighbors(node1Group);
-		
-		ArrayList<AirportNode> node2Group = new ArrayList();
-		
-		node2Group.add(node4);
-		node2Group.add(node5);
-		node2.setNeighbors(node2Group);
-		
-		ArrayList<AirportNode> node3Group = new ArrayList();
-		
-		node3Group.add(node6);
-		node3Group.add(node7);
-		node3.setNeighbors(node3Group);
-		
-		ArrayList<AirportNode> node4Group = new ArrayList();
-		
-		node4Group.add(node7);
-		node4.setNeighbors(node4Group);
-		
-		ArrayList<AirportNode> node5Group = new ArrayList();
-		
-		node5Group.add(node3);
-		node5.setNeighbors(node5Group);
+		MSY_Flights.add(MSY_ATL);
+		MSY_Flights.add(MSY_DFW);
+		MSY_Flights.add(MSY_BOS);
+		MSY_Flights.add(MSY_LHR);
+		MSY.setNeighbors(MSY_Flights);
 
-		ArrayList<AirportNode> node6Group = new ArrayList();
+		System.out.println(MSY);
+		ArrayList<Connection> ATL_Flights = new ArrayList();
+		Connection ATL_MSY = new Connection("ATL->MSY",ATL,MSY,424.73);
+		Connection ATL_DFW = new Connection("ATL->DFW",ATL,DFW,729.79);
+		Connection ATL_LHR = new Connection("ATL->LHR",ATL,LHR,4200.74);
+		Connection ATL_ORD = new Connection("ATL->MSY",ATL,MSY,606.63);
+	
 		
-		node6Group.add(node7);
-		node6.setNeighbors(node6Group);
-		
-		findShortestPath(node2,node7);
 	}
 	
 }
