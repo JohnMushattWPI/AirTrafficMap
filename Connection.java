@@ -1,17 +1,18 @@
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 
-public class Connection implements Node{
+public class Connection{
 	private String name;
 	private Node source, target;
-	private ArrayList<Node> neighbors;
+	private ArrayList<AirportNode> neighbors;
 	private double distance;
 	
-	public Connection (String name, Node source, Node target, double distance) {
+	public Connection (String name, AirportNode source, AirportNode target, double distance) {
 		this.name=name;
 		this.source=source;
 		this.target=target;
-		this.distance=distance;
+		this.distance=distance; 
 		neighbors= new ArrayList<>();
 		neighbors.add(source);
 		neighbors.add(target);
@@ -31,11 +32,11 @@ public class Connection implements Node{
 	public String getName() {
 		return this.name;
 	}
-	@Override
-	public Collection<? extends Node> getNeighbors() {
+	
+	public ArrayList<AirportNode> getNeighbors() {
 		return this.neighbors;
 	}
-	@Override
+	
 	public String getNodeName() {
 		return this.getName();
 	}

@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class AirportNode implements Node{
+public class AirportNode{
 
 	String name;
 	ArrayList<Connection> connections;
@@ -9,37 +9,85 @@ public class AirportNode implements Node{
 		this.name=name;
 	}
 	
+	
+	public Boolean equals(AirportNode other) {
+		if(this.getNodeName().equals(other.getNodeName())) {
+			return true;
+		}
+		return false;
+	}
+	
+	
 	public String getNodeName() {
 		return this.name;
 	}
 	
-	public Collection<? extends Node> getNeighbors() {
+	public ArrayList<Connection> getNeighbors() {
 		return this.connections;
 	}
+	
+	
 	public void setNeighbors(ArrayList<Connection> connections) {
 		this.connections=connections;
 	}
+	
+	
 	public String toString()
 	{
 		String temp = "Airport: " + this.getNodeName() +"\nAll connections from this airport:\n" + 
-	"Source\t\tDestination\tDistance\n";
+	"Source\t\tDestination\tDistance (Miles)\n";
 		for(int i =0; i<this.connections.size();i++) {
 			temp+=this.connections.get(i).toString() +"\n";
 		}
 		return temp;
 	}
-	public static  List<Node> getShortestPathByWeight(Node s, Node t) {
+	
+	
+	public Boolean hasConnection(AirportNode other) {
+		for(Connection flight: this.getNeighbors())
+		{
+			if(flight instanceof Connection) {
+				if(((Connection) flight).getTarget().equals(other)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	
+	public List<AirportNode> getShortestPathByDistance(Node t) {
 		List<Node> finalList = new ArrayList<>();
 		
-		Queue<Node> todo = new LinkedList<>();
-		List<Node> visited = new ArrayList<>();
-		Map<Node, Integer> weightMap = new HashMap<Node, Integer>();
+		Queue<AirportNode> todo = new LinkedList<>();
+		List<AirportNode> visited = new ArrayList<>();
+		Map<AirportNode, Double> distance = new HashMap<AirportNode, Double>();
+		boolean found =false;
 		
+		todo.add(this);
+		distance.put(this, Double.valueOf(0));
 		
-		todo.add(s);
-		
+		while(!todo.isEmpty()) {
+			AirportNode currentNode = todo.peek();
+			visited.add(currentNode);
+			if(currentNode.equals(t)) {
+				found=true;
+				break;
+			}
+			else {
+				for(int i =0;i<currentNode.getNeighbors().size();i++){
+					currentNode.getNeighbors().get
+					if(!todo.contains() && !visited.contains(connection) && !distance.containsKey(connection)) {
+						todo.add(connection);
+						distance.put(connection, Double.valueOf(distance.get(currentNode).doubleValue() +this.connections.g));
+					}
+				}
+			}
+		}
 		return finalList;
 	}
+	
+	
 	/*static public List<Node> findShortestPath(Node s, Node t) {
 		
 		List<Node> visited = new ArrayList<>();		//Might want to make a LinkedList
@@ -116,16 +164,12 @@ public class AirportNode implements Node{
 		 */
 		
 		AirportNode MSY = new AirportNode("New Orleans");
-		
 		AirportNode ATL = new AirportNode("Atlanta");
 		AirportNode DFW = new AirportNode("Dallas");
-		
 		AirportNode ORD = new AirportNode("Chicago");
 		AirportNode BOS = new AirportNode("Boston");
-		
-		AirportNode node5 = new AirportNode("San Fran");
-		AirportNode node6 = new AirportNode("Washington D.C.");
-		
+		AirportNode SFO = new AirportNode("San Francisco");
+		AirportNode DCA = new AirportNode("Washington D.C.");
 		AirportNode LHR = new AirportNode("London");
 		
 		ArrayList<Connection> MSY_Flights = new ArrayList();
@@ -140,15 +184,22 @@ public class AirportNode implements Node{
 		MSY_Flights.add(MSY_BOS);
 		MSY_Flights.add(MSY_LHR);
 		MSY.setNeighbors(MSY_Flights);
-
 		System.out.println(MSY);
+		
 		ArrayList<Connection> ATL_Flights = new ArrayList();
 		Connection ATL_MSY = new Connection("ATL->MSY",ATL,MSY,424.73);
 		Connection ATL_DFW = new Connection("ATL->DFW",ATL,DFW,729.79);
 		Connection ATL_LHR = new Connection("ATL->LHR",ATL,LHR,4200.74);
-		Connection ATL_ORD = new Connection("ATL->MSY",ATL,MSY,606.63);
-	
+		Connection ATL_ORD = new Connection("ATL->ORD",ATL,ORD,606.63);
+		Connection ATL_DCA = new Connection("ATL->DCA",ATL,DCA,546.84);
 		
+		ATL_Flights.add(ATL_DCA);
+		ATL_Flights.add(ATL_ORD);
+		ATL_Flights.add(ATL_LHR);
+		ATL_Flights.add(ATL_MSY);
+		ATL_Flights.add(ATL_DFW);
+		ATL.setNeighbors(ATL_Flights);
+		System.out.println(ATL);
 	}
 	
 }
