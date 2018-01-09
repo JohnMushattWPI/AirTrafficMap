@@ -56,6 +56,7 @@ public class AirportNode{
 	}
 	
 	
+	/*
 	public List<AirportNode> getShortestPathByDistance(Node t) {
 		List<Node> finalList = new ArrayList<>();
 		
@@ -85,7 +86,7 @@ public class AirportNode{
 			}
 		}
 		return finalList;
-	}
+	}*/
 	
 	
 	/*static public List<Node> findShortestPath(Node s, Node t) {
@@ -200,6 +201,42 @@ public class AirportNode{
 		ATL_Flights.add(ATL_DFW);
 		ATL.setNeighbors(ATL_Flights);
 		System.out.println(ATL);
+		
+		
+		
+		FlightPlan test = new FlightPlan(MSY,LHR);
+	
+		test.addPath(MSY,MSY_ATL);
+		System.out.println(test);
+		test.addPath(ATL, ATL_LHR);
+		System.out.println(test);
+		System.out.println(test.getTotalDistance());
+		
+		System.out.println("--------------------\n" + test.getPlanAirport());
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 	
 }

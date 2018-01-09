@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class Connection{
 	private String name;
-	private Node source, target;
+	private AirportNode source, target;
 	private ArrayList<AirportNode> neighbors;
 	private double distance;
 	
@@ -23,10 +23,10 @@ public class Connection{
 	public double getDistance() {
 		return this.distance;
 	}
-	public Node getSource() {
+	public AirportNode getSource() {
 		return this.source;
 	}
-	public Node getTarget() {
+	public AirportNode getTarget() {
 		return this.target;
 	}
 	public String getName() {
