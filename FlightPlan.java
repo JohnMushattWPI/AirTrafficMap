@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 
 public class FlightPlan {
 
@@ -36,6 +40,11 @@ public class FlightPlan {
 	private AirportNode getNextAirport(AirportNode source) {
 		return path.get(source).getTarget();
 	}
+	private Connection getNextConnection(AirportNode source) {
+		return path.get(source);
+	}
+	
+	
 	public ArrayList<AirportNode> getPlanAirport() {
 		ArrayList<AirportNode> order = new ArrayList<>();
 		order.add(source);
@@ -45,16 +54,49 @@ public class FlightPlan {
 		while(order.size()<path.size()) {
 			order.add(getNextAirport(currentAirport));
 			currentAirport=getNextAirport(currentAirport);
-			/*order.add Add
-			 * path.get
-			order.add(path.get(order.get(prev)).getTarget());
-			prev++;
-			*/
 		}
-		return order;
+		return null;
 	}
 	public ArrayList<Connection> getPlanConnection() {
+		ArrayList<Connection> order = new ArrayList<>();
+		
+		order.add(path.get(source));
+		AirportNode currentAirport = source;
+		while(order.size()<path.size()) {
+			order.add(getNextConnection(currentAirport));
+			currentAirport=getNextAirport(currentAirport);
+		}
 		return null;
+	}
+	
+	public void getShortestPath() {
+			
+		Queue<AirportNode>  todo= new LinkedList<>();
+		LinkedList<AirportNode> visited = new LinkedList<>();
+		HashMap<AirportNode,Double> distance = new HashMap<>();
+		todo.add(source);
+		distance.put(source, new Double(0));
+		while(!todo.isEmpty()) {
+			AirportNode currentAirport = todo.peek();
+			visited.add(currentAirport);
+			if(currentAirport.equals(target)) {
+				break;
+			}
+			else {
+				
+				for(AirportNode nextAirport : currentAirport.getNeighborAirports()) {
+					if (!todo.contains(nextAirport) && !visited.contains(nextAirport) && !distance.containsKey(nextAirport)) {
+						
+						todo.add(nextAirport)
+					}
+					
+				}
+			}
+		
+		
+			
+			
+		}
 	}
 	public static void main(String[] args) {
 		

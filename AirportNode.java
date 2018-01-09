@@ -25,6 +25,13 @@ public class AirportNode{
 	public ArrayList<Connection> getNeighbors() {
 		return this.connections;
 	}
+	public ArrayList<AirportNode> getNeighborAirports() {
+		ArrayList<AirportNode> otherAirports = new ArrayList<>();
+		for(Connection connection : this.getNeighbors()) {
+			otherAirports.add(connection.getTarget());
+		}
+		return otherAirports;
+	}
 	
 	
 	public void setNeighbors(ArrayList<Connection> connections) {
