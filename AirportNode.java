@@ -213,13 +213,9 @@ public class AirportNode{
 		
 		FlightPlan test = new FlightPlan(MSY,LHR);
 	
-		test.addPath(MSY,MSY_ATL);
-		System.out.println(test);
-		test.addPath(ATL, ATL_LHR);
-		System.out.println(test);
-		System.out.println(test.getTotalDistance());
 		
-		System.out.println("--------------------\n" + test.getPlanAirport());
+		System.out.println("--------------------\n");
+		test.getShortestPath();
 		
 		
 		
